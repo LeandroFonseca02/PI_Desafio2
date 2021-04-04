@@ -16,7 +16,7 @@ Outputs:
 
 
 void main(){
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "Portuguese");
     int intMenuChoice = 0, intExit = 0;
     while (intExit != 1){
         clear_screen();

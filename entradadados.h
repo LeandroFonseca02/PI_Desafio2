@@ -19,11 +19,12 @@ void clearArray(int intStringLength, int intArray[intStringLength]){
 
 void clear_screen()
 {
-#ifdef WINDOWS
+#if defined(linux) || defined(unix) || defined(APPLE)
+    system("clear");
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
     system("cls");
-#else
-    // Assume POSIX
-    system ("clear");
 #endif
 }
 
