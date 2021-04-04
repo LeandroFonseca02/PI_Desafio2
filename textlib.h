@@ -12,6 +12,18 @@
 #define MENU_DATA_TYPE_NUM_TYPE2 "#\t6.Números decimais\t\t\t\t\t\t\t\t\t  #\n"
 #define MENU_DATA_TYPE_STRING_TYPE5 "#\t7.Letras Maiúsculas + minúsculas + números + espaço   #\n"
 #define MENU_DATA_TYPE_STRING_TYPE6 "#\t8.Todos os caracteres\t\t\t\t\t\t\t\t  #\n"
-#define MENU_DATA_ENTRY "\n\nIntroduza os dados que deseja: "
-#define MENU_DATA_RESULT "Dados inseridos: %s\n\n"
+
+#define MENU_SELECTED_OPTION_1 "Opção 1 selecionada - Letras Maiúsculas + espaço\n"
+#define MENU_SELECTED_OPTION_2 "Opção 2 selecionada - Letras minúsculas + espaço\n"
+#define MENU_SELECTED_OPTION_3 "Opção 3 selecionada - Letras Maiúsculas + espaço + caracteres especiais\n"
+#define MENU_SELECTED_OPTION_4 "Opção 4 selecionada - Letras minúsculas + espaço + caracteres especiais\n"
+#define MENU_SELECTED_OPTION_5 "Opção 5 selecionada - Números inteiros\n"
+#define MENU_SELECTED_OPTION_6 "Opção 6 selecionada - Números decimais\n"
+#define MENU_SELECTED_OPTION_7 "Opção 7 selecionada - Letras Maiúsculas + minúsculas + números + espaço\n"
+#define MENU_SELECTED_OPTION_8 "Opção 8 selecionada - Todos os caracteres\n"
+
+#define MENU_RETURN_OPTION "\n\nDeseja voltar ao menu (S - sim; N - não): "
+
+#define MENU_DATA_ENTRY "\nIntroduza os dados que deseja: "
+#define MENU_DATA_RESULT "Dados inseridos: "
 #define MENU_EXIT_PROGRAM "\n\nA sair do programa..."
