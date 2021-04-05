@@ -383,7 +383,7 @@ void numerosDecimais(){
 
     printf(MENU_SELECTED_OPTION_6);
 
-    int intStringPosition = 0, intDecimalLength = 0, intIntLength = 10, intDecimalFlag =0;
+    int intStringPosition = 0, intDecimalLength = 0, intIntLength = 1, intDecimalFlag =0;
 
     printf(MENU_DATA_TYPE_DECIMAL_LENGTH);
     fflush(stdin);
@@ -391,7 +391,7 @@ void numerosDecimais(){
 
     clsKeyboardBuffer();
 
-    unsigned char chrData[intIntLength+intDecimalLength];
+    unsigned char chrData[intIntLength+intDecimalLength+1];
     unsigned char chrUserInput = 0;
     unsigned char *chrUserData = chrData;
 
@@ -429,7 +429,7 @@ void numerosDecimais(){
         } else {
             chrUserData[intStringPosition] = 0;
         }
-    } while (intStringPosition < intIntLength+intDecimalLength);
+    } while (intStringPosition < intIntLength+intDecimalLength+1);
     printf(MENU_DATA_RESULT);
 
     //Imprimir os dados inseridos em UTF-8
