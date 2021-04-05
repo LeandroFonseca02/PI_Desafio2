@@ -2,30 +2,13 @@
 #include <stdlib.h>
 #include "textlib.h"
 #include <ctype.h>
-
-#ifdef _WIN32
-#include <conio.h>
-#endif
-
-#ifdef linux
 #include "coniolinux.h"
-#endif
 
-void clearArray(int intStringLength, int intArray[intStringLength]){
+
+void clearArray(int intStringLength, unsigned char chrArray[intStringLength]){
     for (int i = 0; i <intStringLength; ++i) {
-        intArray[i] = 0;
+        chrArray[i] = 0;
     }
-}
-
-void clear_screen()
-{
-#if defined(linux) || defined(unix) || defined(APPLE)
-    system("clear");
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-    system("cls");
-#endif
 }
 
 void clsKeyboardBuffer(void){
@@ -59,10 +42,10 @@ int linuxPTchar(){
     //o 195 que é a keycode das teclas especiais no layout portugues, e somar
     //o segundo keycode do caracter e somar 4 obtem-se o codigo ascii da extended table utf-8
     //printf("%lc %d\n", 255-195+((int)chr)+4,255-195+((int)chr)+4);
-    int intKeycode = 0, intUnicode = 0;
+    int intKeycode = 0, intUTF8 = 0;
     intKeycode = getche();
-    intUnicode = 255 - 195 + intKeycode + 4;
-    return intUnicode;
+    intUTF8 = 255 - 195 + intKeycode + 4;
+    return intUTF8;
 }
 
 void printStartMenu() {
@@ -94,9 +77,9 @@ void letrasMaiscEspaco(){
 
     scanf("%d", &intStringLength);
     clsKeyboardBuffer();
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     clearArray(intStringLength,chrData);
 
@@ -122,14 +105,8 @@ void letrasMaiscEspaco(){
             }
 
         }
-            //Letras portuguesas maisculas windows Latin-1 CP850
-        else if ((chrUserInput == 128) || (chrUserInput == 144) || (chrUserInput > 180 && chrUserInput < 184) || (chrUserInput == 199) || (chrUserInput == 210) || (chrUserInput == 212) || (chrUserInput == 214) || (chrUserInput == 222) || (chrUserInput == 224) || (chrUserInput == 226) || (chrUserInput == 227) || (chrUserInput == 229) || (chrUserInput == 233) || (chrUserInput == 234) || (chrUserInput == 235)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Tecla de Enter        10 - Linux             13 - Windows
-        else if(chrUserInput == 10 || chrUserInput == 13){
+                //Tecla de Enter
+        else if(chrUserInput == 10){
             intStringPosition = intStringLength+1;
         }
             //Tecla de BackSpace
@@ -157,9 +134,9 @@ void letrasMinuscEspaco(){
 
     scanf("%d", &intStringLength);
     clsKeyboardBuffer();
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     clearArray(intStringLength,chrData);
 
@@ -186,14 +163,8 @@ void letrasMinuscEspaco(){
             }
 
         }
-            //Letras portuguesas minusculas windows Latin-1 CP850
-        else if ((chrUserInput == 130) || (chrUserInput == 131) || (chrUserInput == 133) || (chrUserInput == 135) || (chrUserInput == 136) || (chrUserInput == 138) || (chrUserInput == 140) || (chrUserInput == 141) || (chrUserInput == 147) || (chrUserInput == 149) || (chrUserInput == 150) || (chrUserInput == 151) || (chrUserInput > 159 && chrUserInput < 164) || (chrUserInput == 198) || (chrUserInput == 228)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Tecla de Enter        10 - Linux             13 - Windows
-        else if(chrUserInput == 10 || chrUserInput == 13){
+            //Tecla de Enter
+        else if(chrUserInput == 10){
             intStringPosition = intStringLength+1;
         }
             //Tecla de BackSpace
@@ -221,9 +192,9 @@ void letrasMaiscEspacoEspeciais(){
 
     scanf("%d", &intStringLength);
     clsKeyboardBuffer();
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     clearArray(intStringLength,chrData);
 
@@ -249,14 +220,8 @@ void letrasMaiscEspacoEspeciais(){
             }
 
         }
-            //Letras portuguesas maisculas windows Latin-1 CP850
-        else if ((chrUserInput == 128) || (chrUserInput == 144) || (chrUserInput > 180 && chrUserInput < 184) || (chrUserInput == 199) || (chrUserInput == 210) || (chrUserInput == 212) || (chrUserInput == 214) || (chrUserInput == 222) || (chrUserInput == 224) || (chrUserInput == 226) || (chrUserInput == 227) || (chrUserInput == 229) || (chrUserInput == 233) || (chrUserInput == 234) || (chrUserInput == 235)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Tecla de Enter        10 - Linux             13 - Windows
-        else if(chrUserInput == 10 || chrUserInput == 13){
+            //Tecla de Enter
+        else if(chrUserInput == 10){
             intStringPosition = intStringLength+1;
         }
             //Tecla de BackSpace
@@ -284,9 +249,9 @@ void letrasMinuscEspacoEspeciais(){
 
     scanf("%d", &intStringLength);
     clsKeyboardBuffer();
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     clearArray(intStringLength,chrData);
 
@@ -312,14 +277,8 @@ void letrasMinuscEspacoEspeciais(){
             }
 
         }
-            //Letras portuguesas minusculas windows Latin-1 CP850
-        else if ((chrUserInput == 130) || (chrUserInput == 131) || (chrUserInput == 133) || (chrUserInput == 135) || (chrUserInput == 136) || (chrUserInput == 138) || (chrUserInput == 140) || (chrUserInput == 141) || (chrUserInput == 147) || (chrUserInput == 149) || (chrUserInput == 150) || (chrUserInput == 151) || (chrUserInput > 159 && chrUserInput < 164) || (chrUserInput == 198) || (chrUserInput == 228)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Tecla de Enter        10 - Linux             13 - Windows
-        else if(chrUserInput == 10 || chrUserInput == 13){
+            //Tecla de Enter
+        else if(chrUserInput == 10){
             intStringPosition = intStringLength+1;
         }
             //Tecla de BackSpace
@@ -342,9 +301,9 @@ void numerosInteiros(){
     printf(MENU_SELECTED_OPTION_5);
 
     int intStringPosition = 0, intStringLength = 20;
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     clearArray(intStringLength,chrData);
 
@@ -357,7 +316,7 @@ void numerosInteiros(){
             chrUserData[intStringPosition] = chrUserInput;
             intStringPosition++;
         }
-            //Tecla de Enter        10 - Linux             13 - Windows
+            //Tecla de Enter
         else if(chrUserInput == 10 || chrUserInput == 13){
             intStringPosition = intStringLength+1;
         }
@@ -388,9 +347,9 @@ void numerosDecimais(){
 
     clsKeyboardBuffer();
 
-    int chrData[intIntLength+intDecimalLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intIntLength+intDecimalLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     clearArray(intDecimalLength+intIntLength, chrData);
 
@@ -404,7 +363,7 @@ void numerosDecimais(){
             chrUserData[intStringPosition+1] = 0;
             intStringPosition++;
         }
-            //Tecla de Enter        10 - Linux             13 - Windows
+            //Tecla de Enter
         else if(chrUserInput == 10 || chrUserInput == 13){
             intStringPosition = intDecimalLength+intIntLength+1;
         }
@@ -445,9 +404,9 @@ void letrasMaiscMinuscNumEspaco(){
     scanf("%d", &intStringLength);
     clsKeyboardBuffer();
 
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     printf(MENU_DATA_ENTRY);
 
@@ -473,14 +432,8 @@ void letrasMaiscMinuscNumEspaco(){
             }
 
         }
-            //Letras portuguesas windows Latin-1 CP850
-        else if ((chrUserInput == 130) || (chrUserInput == 131) || (chrUserInput == 133) || (chrUserInput == 135) || (chrUserInput == 136) || (chrUserInput == 138) || (chrUserInput == 140) || (chrUserInput == 141) || (chrUserInput == 147) || (chrUserInput == 149) || (chrUserInput == 150) || (chrUserInput == 151) || (chrUserInput > 159 && chrUserInput < 164) || (chrUserInput == 198) || (chrUserInput == 228) || (chrUserInput == 128) || (chrUserInput == 144) || (chrUserInput > 180 && chrUserInput < 184) || (chrUserInput == 199) || (chrUserInput == 210) || (chrUserInput == 212) || (chrUserInput == 214) || (chrUserInput == 222) || (chrUserInput == 224) || (chrUserInput == 226) || (chrUserInput == 227) || (chrUserInput == 229) || (chrUserInput == 233) || (chrUserInput == 234) || (chrUserInput == 235)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Tecla de Enter        10 - Linux             13 - Windows
-        else if(chrUserInput == 10 || chrUserInput == 13){
+            //Tecla de Enter
+        else if(chrUserInput == 10){
             intStringPosition = intStringLength+1;
         }
             //Tecla de BackSpace
@@ -509,9 +462,9 @@ void todosCaracteres(){
     scanf("%d", &intStringLength);
     clsKeyboardBuffer();
 
-    int chrData[intStringLength];
-    int chrUserInput = 0;
-    int *chrUserData = chrData;
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
 
     printf(MENU_DATA_ENTRY);
 
@@ -537,14 +490,8 @@ void todosCaracteres(){
             }
 
         }
-            //Letras portuguesas windows Latin-1 CP850
-        else if ((chrUserInput == 130) || (chrUserInput == 131) || (chrUserInput == 133) || (chrUserInput == 135) || (chrUserInput == 136) || (chrUserInput == 138) || (chrUserInput == 140) || (chrUserInput == 141) || (chrUserInput == 147) || (chrUserInput == 149) || (chrUserInput == 150) || (chrUserInput == 151) || (chrUserInput > 159 && chrUserInput < 164) || (chrUserInput == 198) || (chrUserInput == 228) || (chrUserInput == 128) || (chrUserInput == 144) || (chrUserInput > 180 && chrUserInput < 184) || (chrUserInput == 199) || (chrUserInput == 210) || (chrUserInput == 212) || (chrUserInput == 214) || (chrUserInput == 222) || (chrUserInput == 224) || (chrUserInput == 226) || (chrUserInput == 227) || (chrUserInput == 229) || (chrUserInput == 233) || (chrUserInput == 234) || (chrUserInput == 235)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Tecla de Enter        10 - Linux             13 - Windows
-        else if(chrUserInput == 10 || chrUserInput == 13){
+            //Tecla de Enter
+        else if(chrUserInput == 10){
             intStringPosition = intStringLength+1;
         }
             //Tecla de BackSpace
