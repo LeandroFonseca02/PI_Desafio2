@@ -19,7 +19,7 @@ void numerosInteiros();
 void numerosDecimais();
 void letrasMaiscMinuscNumEspaco();
 void todosCaracteres();
-int regexValidator(const char *chrKeysInput, const char *chrRegexArg);
+int regexValidator(const char *chrInput, const char *chrRegexExpression);
 
 
 
