@@ -4,6 +4,7 @@ Programação Imperatica - Prof. Francisco Pereira
 Leandro Fonseca
 05/04/2021 - 00:20
 Resumo: Desafio 2
+Aviso: Este programa foi desenvolvido utilizando ANSI C para a plataforma Linux Ubuntu 64bit
  */
 
 #include <stdio.h>
