@@ -351,8 +351,7 @@ void numerosInteiros(){
 
     do {
         chrUserInput = getche();
-        chrUserData[intStringPosition] = chrUserInput;
-        intStringPosition++;
+
         //Numeros Inteiros
         if (chrUserInput > 47 && chrUserInput < 58) {
             chrUserData[intStringPosition] = chrUserInput;

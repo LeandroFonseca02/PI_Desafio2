@@ -23,6 +23,7 @@ int main(){
     clsKeyboardBuffer();
 
     while (intExit != 1){
+        system("clear");
         printStartMenu();
         scanf("%d", &intMenuChoice);
         clsKeyboardBuffer();
