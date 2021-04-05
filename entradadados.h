@@ -433,7 +433,7 @@ void numerosDecimais(){
     printf(MENU_DATA_RESULT);
 
     //Imprimir os dados inseridos em UTF-8
-    for (intStringPosition = 0; intStringPosition < intIntLength+intDecimalLength; intStringPosition++){
+    for (intStringPosition = 0; intStringPosition < intIntLength+intDecimalLength+1; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
 }
