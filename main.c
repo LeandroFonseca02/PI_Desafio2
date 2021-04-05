@@ -16,7 +16,11 @@ Resumo: Desafio 2
 int main(){
     setlocale(LC_ALL, "en_US.UTF-8");  // importa as variáveis de ambiente
     setlocale (LC_CTYPE, "en_US.UTF-8");    //Forçar para en_US.UTF-8
-    int intMenuChoice = 0, intExit = 0;
+    int intMenuChoice = 0, intExit = 0, intValidationChoice = 0;
+    printf(MENU_REGEX_GETCHE);
+    scanf("%d", &intValidationChoice);
+    clsKeyboardBuffer();
+
     while (intExit != 1){
         printStartMenu();
         scanf("%d", &intMenuChoice);
@@ -24,42 +28,42 @@ int main(){
         switch (intMenuChoice) {
 
             case 1:
-                letrasMaiscEspaco();
+                intValidationChoice == 1 ? letrasMaiscEspaco() : regexInput("^.*(([A-Z])).*$");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 2:
-                letrasMinuscEspaco();
+                intValidationChoice == 1 ? letrasMinuscEspaco() : regexInput("^.*(([a-z])).*$");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 3:
-                letrasMaiscEspacoEspeciais();
+                intValidationChoice == 1 ? letrasMaiscEspacoEspeciais() : regexInput("^.*(([A-Z])).*$");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 4:
-                letrasMinuscEspacoEspeciais();
+                intValidationChoice == 1 ? letrasMinuscEspacoEspeciais() : regexInput("^.*(([a-z])).*$");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 5:
-                numerosInteiros();
+                intValidationChoice == 1 ? numerosInteiros() : regexInput("^.*(([0-9])).*");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 6:
-                numerosDecimais();
+                intValidationChoice == 1 ? numerosDecimais() : regexInput("^.*[0-9]+.*");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 7:
-                letrasMaiscMinuscNumEspaco();
+                intValidationChoice == 1 ? letrasMaiscMinuscNumEspaco() : regexInput("^.*(([a-zA-Z0-9])).*$");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;
             case 8:
-                todosCaracteres();
+                intValidationChoice == 1 ? todosCaracteres() : regexInput("^.*(([a-zA-Z0-9])).*$");
                 clsKeyboardBuffer();
                 intExit = checkContinue();
                 break;

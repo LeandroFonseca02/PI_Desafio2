@@ -1,11 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "textlib.h"
+#include <regex.h>
 #include <ctype.h>
 #include "coniolinux.h"
+#include "textlib.h"
 
+//Protótipos das funçoes
+void clearArray(int intStringLength, unsigned char chrArray[intStringLength]);
+void clsKeyboardBuffer(void);
+int checkContinue();
+unsigned char linuxPTchar();
+void printStartMenu();
 void letrasMaiscEspaco();
+void letrasMinuscEspaco();
+void letrasMaiscEspacoEspeciais();
+void letrasMinuscEspacoEspeciais();
+void numerosInteiros();
+void numerosDecimais();
+void letrasMaiscMinuscNumEspaco();
+void todosCaracteres();
+int regexValidator(const char *chrKeysInput, const char *chrRegexArg);
 
+//Implementação das funçoes
 void clearArray(int intStringLength, unsigned char chrArray[intStringLength]){
     for (int i = 0; i <intStringLength; ++i) {
         chrArray[i] = 0;
@@ -67,7 +83,66 @@ void printStartMenu() {
     fflush(stdin);
 }
 
+void letrasMaiscEspaco(){
+    //Letras Maiúsculas + espaço
 
+    printf(MENU_SELECTED_OPTION_1);
+
+    int intStringPosition = 0, intStringLength = 0;
+
+    printf(MENU_DATA_TYPE_STRING_LENGTH);
+
+    scanf("%d", &intStringLength);  //Retorna o tamanho da string
+    clsKeyboardBuffer();
+    unsigned char chrData[intStringLength];
+    unsigned char chrUserInput = 0;
+    unsigned char *chrUserData = chrData;
+
+    //Limpar o array
+    clearArray(intStringLength,chrData);
+
+    printf(MENU_DATA_ENTRY);
+
+    //Enquanto a posiçao no array for menor que o seu comprimento faz a validação
+    do {
+        chrUserInput = getche();
+        //Letras Maiúsculas + espaço
+        if ((chrUserInput > 64 && chrUserInput < 91) || (chrUserInput == 32)) {
+            chrUserData[intStringPosition] = chrUserInput;
+            chrUserData[intStringPosition+1] = 0;
+            intStringPosition++;
+        }
+            //Letras portuguesas maisculas linux
+        else if(chrUserInput == 195){
+            chrUserInput = linuxPTchar();
+            if(chrUserInput > 191 && chrUserInput < 222){
+                chrUserData[intStringPosition] = chrUserInput;
+                chrUserData[intStringPosition+1] = 0;
+                intStringPosition++;
+            }else{
+                chrUserData[intStringPosition] = 0;
+            }
+
+        }
+            //Tecla de Enter
+        else if(chrUserInput == 10){
+            intStringPosition = intStringLength+1;
+        }
+            //Tecla de BackSpace
+        else if(chrUserInput == 8){
+            chrUserData[intStringPosition] = 0;
+            intStringPosition--;
+        }else{
+            chrUserData[intStringPosition] = 0;
+        }
+    } while (intStringPosition < intStringLength);
+    printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
+    for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
+        printf("%lc",chrUserData[intStringPosition]);
+    }
+}
 
 void letrasMinuscEspaco(){
     //Letras minusculas + espaço
@@ -78,7 +153,7 @@ void letrasMinuscEspaco(){
 
     printf(MENU_DATA_TYPE_STRING_LENGTH);
 
-    scanf("%d", &intStringLength);
+    scanf("%d", &intStringLength);  //Retorna o tamanho da string
     clsKeyboardBuffer();
     unsigned char chrData[intStringLength];
     unsigned char chrUserInput = 0;
@@ -122,6 +197,8 @@ void letrasMinuscEspaco(){
         }
     } while (intStringPosition < intStringLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
@@ -136,7 +213,7 @@ void letrasMaiscEspacoEspeciais(){
 
     printf(MENU_DATA_TYPE_STRING_LENGTH);
 
-    scanf("%d", &intStringLength);
+    scanf("%d", &intStringLength);  //Retorna o tamanho da string
     clsKeyboardBuffer();
     unsigned char chrData[intStringLength];
     unsigned char chrUserInput = 0;
@@ -154,7 +231,7 @@ void letrasMaiscEspacoEspeciais(){
             chrUserData[intStringPosition+1] = 0;
             intStringPosition++;
         }
-        //Letras portuguesas maisculas linux
+            //Letras portuguesas maisculas linux
         else if(chrUserInput == 195){
             chrUserInput = linuxPTchar();
             if(chrUserInput > 191 && chrUserInput < 222){
@@ -179,6 +256,8 @@ void letrasMaiscEspacoEspeciais(){
         }
     } while (intStringPosition < intStringLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
@@ -193,7 +272,7 @@ void letrasMinuscEspacoEspeciais(){
 
     printf(MENU_DATA_TYPE_STRING_LENGTH);
 
-    scanf("%d", &intStringLength);
+    scanf("%d", &intStringLength);  //Retorna o tamanho da string
     clsKeyboardBuffer();
     unsigned char chrData[intStringLength];
     unsigned char chrUserInput = 0;
@@ -211,7 +290,7 @@ void letrasMinuscEspacoEspeciais(){
             chrUserData[intStringPosition+1] = 0;
             intStringPosition++;
         }
-        //Letras portuguesas minusculas linux
+            //Letras portuguesas minusculas linux
         else if(chrUserInput == 195){
             chrUserInput = linuxPTchar();
             if(chrUserInput > 223 && chrUserInput < 255){
@@ -236,6 +315,8 @@ void letrasMinuscEspacoEspeciais(){
         }
     } while (intStringPosition < intStringLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
@@ -257,6 +338,8 @@ void numerosInteiros(){
 
     do {
         chrUserInput = getche();
+        chrUserData[intStringPosition] = chrUserInput;
+        intStringPosition++;
         //Numeros Inteiros
         if (chrUserInput > 47 && chrUserInput < 58) {
             chrUserData[intStringPosition] = chrUserInput;
@@ -275,6 +358,8 @@ void numerosInteiros(){
         }
     } while (intStringPosition < intStringLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
@@ -285,11 +370,11 @@ void numerosDecimais(){
 
     printf(MENU_SELECTED_OPTION_6);
 
-    int intStringPosition = 0, intDecimalLength = 0, intIntLength = 20, intDecimalFlag =0;
+    int intStringPosition = 0, intDecimalLength = 0, intIntLength = 10, intDecimalFlag =0;
 
     printf(MENU_DATA_TYPE_DECIMAL_LENGTH);
     fflush(stdin);
-    scanf("%d", &intDecimalLength);
+    scanf("%d", &intDecimalLength); //Retorna o tamanho da parte decimal
 
     clsKeyboardBuffer();
 
@@ -333,6 +418,8 @@ void numerosDecimais(){
         }
     } while (intStringPosition < intIntLength+intDecimalLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intIntLength+intDecimalLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
@@ -347,7 +434,7 @@ void letrasMaiscMinuscNumEspaco(){
 
     printf(MENU_DATA_TYPE_STRING_LENGTH);
     fflush(stdin);
-    scanf("%d", &intStringLength);
+    scanf("%d", &intStringLength);  //Retorna o tamanho da string
     clsKeyboardBuffer();
 
     unsigned char chrData[intStringLength];
@@ -391,6 +478,8 @@ void letrasMaiscMinuscNumEspaco(){
         }
     } while (intStringPosition < intStringLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
@@ -405,7 +494,7 @@ void todosCaracteres(){
 
     printf(MENU_DATA_TYPE_STRING_LENGTH);
     fflush(stdin);
-    scanf("%d", &intStringLength);
+    scanf("%d", &intStringLength);  //Retorna o tamanho da string
     clsKeyboardBuffer();
 
     unsigned char chrData[intStringLength];
@@ -449,7 +538,45 @@ void todosCaracteres(){
         }
     } while (intStringPosition < intStringLength);
     printf(MENU_DATA_RESULT);
+
+    //Imprimir os dados inseridos em UTF-8
     for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
         printf("%lc",chrUserData[intStringPosition]);
     }
+}
+
+//Funçoes com regex
+int regexValidator(const char *chrInput, const char *chrRegexExpression){
+    regex_t regex;
+    int intRegexOk = 0, intRegexCompileOk = 0;
+
+    //Compilação da expressão regular
+    intRegexCompileOk = regcomp(&regex, chrRegexExpression, REG_EXTENDED);
+
+    //Execução da expressão regular
+    intRegexOk = regexec(&regex, chrInput, 0, NULL, 0);
+
+    if (!intRegexOk){
+        intRegexOk=1;
+    }else if(intRegexOk == REG_NOMATCH){
+        intRegexOk = 0;
+    }
+
+    //Liberta memória alocada do buffer do regexec
+    regfree(&regex);
+    return intRegexOk;
+}
+
+void regexInput(const char *chrRegexExpression){
+    int intValidatorOk = 1;
+    char chrMessageBuffer[100];
+
+    printf(MENU_DATA_ENTRY);
+    fgets(chrMessageBuffer,100, stdin); //Receber input string
+
+    //Validar a string segundo a expressão regular
+    intValidatorOk=regexValidator(chrMessageBuffer,chrRegexExpression);
+
+    intValidatorOk ? printf(MENU_DATA_RESULT_REGEX, chrMessageBuffer) : printf(MENU_DATA_INVALID);
+
 }
