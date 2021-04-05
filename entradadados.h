@@ -8,7 +8,7 @@
 //Protótipos das funçoes
 void clearArray(int intStringLength, unsigned char chrArray[intStringLength]);
 void clsKeyboardBuffer(void);
-int checkContinue();
+int checkExit();
 unsigned char linuxPTchar();
 void printStartMenu();
 void letrasMaiscEspaco();
@@ -21,13 +21,18 @@ void letrasMaiscMinuscNumEspaco();
 void todosCaracteres();
 int regexValidator(const char *chrKeysInput, const char *chrRegexArg);
 
+
+
 //Implementação das funçoes
+
+//Percorre um array e poe o valores de todos os valores a 0
 void clearArray(int intStringLength, unsigned char chrArray[intStringLength]){
     for (int i = 0; i <intStringLength; ++i) {
         chrArray[i] = 0;
     }
 }
 
+//Limpa o buffer do teclado
 void clsKeyboardBuffer(void){
     int c = 0;
     while ((c = getchar()) != '\n' && c != EOF){
@@ -35,24 +40,26 @@ void clsKeyboardBuffer(void){
     }
 }
 
-int checkContinue()
+//Função para continuar ou nao no programa. Retorna 1 - Sai do programa; 0 - Continua
+int checkExit()
 {
     char chrCheckContinue = '\0';
     int intExit = 1;
     printf(MENU_RETURN_OPTION);
-    scanf(" %c", &chrCheckContinue);
+    scanf(" %c", &chrCheckContinue);    //Retorna input da saida
 
     if(tolower(chrCheckContinue) == 115){
         intExit = 0;
     }
     else if (tolower(chrCheckContinue) == 110){
-        intExit = 01;
+        intExit = 1;
     }else {
         printf(MENU_EXIT_PROGRAM);
     }
     return intExit;
 }
 
+//Transforma os caracteres multibyte para codigo UTF-8 e retorna
 unsigned char linuxPTchar(){
     //Caracteres Portugueses Linux
     //Linux - Se utilizar unsigned char e subtrair ao ultimo numero da tabela extendida ascii (255)
@@ -65,6 +72,7 @@ unsigned char linuxPTchar(){
     return intUTF8;
 }
 
+//Imprime o Menu
 void printStartMenu() {
     printf(MENU_SEPARADOR);
     printf(MENU_DATA_TYPE);
@@ -83,6 +91,7 @@ void printStartMenu() {
     fflush(stdin);
 }
 
+//Recebe input char a char e valida se é Letras Maiúsculas + espaço
 void letrasMaiscEspaco(){
     //Letras Maiúsculas + espaço
 
@@ -144,6 +153,7 @@ void letrasMaiscEspaco(){
     }
 }
 
+//Recebe input char a char e valida se é Letras minusculas + espaço
 void letrasMinuscEspaco(){
     //Letras minusculas + espaço
 
@@ -159,7 +169,7 @@ void letrasMinuscEspaco(){
     unsigned char chrUserInput = 0;
     unsigned char *chrUserData = chrData;
 
-    clearArray(intStringLength,chrData);
+    clearArray(intStringLength,chrData);    //Limpa o array
 
     printf(MENU_DATA_ENTRY);
 
@@ -204,6 +214,7 @@ void letrasMinuscEspaco(){
     }
 }
 
+//Recebe input char a char e valida se é Letras Maiúsculas + espaço +  caracteres especiais
 void letrasMaiscEspacoEspeciais(){
     //Letras Maiúsculas + espaço +  caracteres especiais
 
@@ -219,7 +230,7 @@ void letrasMaiscEspacoEspeciais(){
     unsigned char chrUserInput = 0;
     unsigned char *chrUserData = chrData;
 
-    clearArray(intStringLength,chrData);
+    clearArray(intStringLength,chrData);    //Limpa o array
 
     printf(MENU_DATA_ENTRY);
 
@@ -263,6 +274,7 @@ void letrasMaiscEspacoEspeciais(){
     }
 }
 
+//Recebe input char a char e valida se é Letras minúsculas + espaço +  caracteres especiais
 void letrasMinuscEspacoEspeciais(){
     //Letras minúsculas + espaço +  caracteres especiais
 
@@ -278,7 +290,7 @@ void letrasMinuscEspacoEspeciais(){
     unsigned char chrUserInput = 0;
     unsigned char *chrUserData = chrData;
 
-    clearArray(intStringLength,chrData);
+    clearArray(intStringLength,chrData);    //Limpa o array
 
     printf(MENU_DATA_ENTRY);
 
@@ -322,6 +334,7 @@ void letrasMinuscEspacoEspeciais(){
     }
 }
 
+//Recebe input char a char e valida se é Numeros Inteiros
 void numerosInteiros(){
     //Numeros Inteiros
 
@@ -332,7 +345,7 @@ void numerosInteiros(){
     unsigned char chrUserInput = 0;
     unsigned char *chrUserData = chrData;
 
-    clearArray(intStringLength,chrData);
+    clearArray(intStringLength,chrData);    //Limpa o array
 
     printf(MENU_DATA_ENTRY);
 
@@ -365,6 +378,7 @@ void numerosInteiros(){
     }
 }
 
+//Recebe input char a char e valida se é Numeros Decimais
 void numerosDecimais(){
     //Numeros Decimais
 
@@ -425,6 +439,7 @@ void numerosDecimais(){
     }
 }
 
+//Recebe input char a char e valida se é Letras maiúsculas, minúsculas, números e espaço
 void letrasMaiscMinuscNumEspaco(){
     //Letras maiúsculas, minúsculas, números e espaço
 
@@ -485,6 +500,7 @@ void letrasMaiscMinuscNumEspaco(){
     }
 }
 
+//Recebe input char a char e valida se é qualquer caracter
 void todosCaracteres(){
     //Todos caracteres
 
@@ -545,7 +561,11 @@ void todosCaracteres(){
     }
 }
 
+
+
 //Funçoes com regex
+
+//Valida por regex uma string com a sua expressão regular
 int regexValidator(const char *chrInput, const char *chrRegexExpression){
     regex_t regex;
     int intRegexOk = 0, intRegexCompileOk = 0;
@@ -567,6 +587,7 @@ int regexValidator(const char *chrInput, const char *chrRegexExpression){
     return intRegexOk;
 }
 
+//Recebe input do utilizador e imprime caso seja válido
 void regexInput(const char *chrRegexExpression){
     int intValidatorOk = 1;
     char chrMessageBuffer[100];

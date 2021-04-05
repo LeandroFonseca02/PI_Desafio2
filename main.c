@@ -30,42 +30,42 @@ int main(){
             case 1:
                 intValidationChoice == 1 ? letrasMaiscEspaco() : regexInput("^.*(([A-Z])).*$");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 2:
                 intValidationChoice == 1 ? letrasMinuscEspaco() : regexInput("^.*(([a-z])).*$");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 3:
                 intValidationChoice == 1 ? letrasMaiscEspacoEspeciais() : regexInput("^.*(([A-Z])).*$");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 4:
                 intValidationChoice == 1 ? letrasMinuscEspacoEspeciais() : regexInput("^.*(([a-z])).*$");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 5:
                 intValidationChoice == 1 ? numerosInteiros() : regexInput("^.*(([0-9])).*");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 6:
                 intValidationChoice == 1 ? numerosDecimais() : regexInput("^.*[0-9]+.*");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 7:
                 intValidationChoice == 1 ? letrasMaiscMinuscNumEspaco() : regexInput("^.*(([a-zA-Z0-9])).*$");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             case 8:
                 intValidationChoice == 1 ? todosCaracteres() : regexInput("^.*(([a-zA-Z0-9])).*$");
                 clsKeyboardBuffer();
-                intExit = checkContinue();
+                intExit = checkExit();
                 break;
             default:
                 printf(MENU_EXIT_PROGRAM);
