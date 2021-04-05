@@ -26,7 +26,7 @@
 #define MENU_REGEX_GETCHE "Escolha o tipo de validação que deseja (1-Getche; 2-Regex): "
 
 #define MENU_DATA_ENTRY "\nIntroduza os dados que deseja: "
-#define MENU_DATA_RESULT "Dados inseridos: "
-#define MENU_DATA_RESULT_REGEX "Dados inseridos: %s"
+#define MENU_DATA_RESULT "\nDados inseridos: "
+#define MENU_DATA_RESULT_REGEX "\nDados inseridos: %s"
 #define MENU_DATA_INVALID "\nValidação de dados incorreta!"
 #define MENU_EXIT_PROGRAM "\n\nA sair do programa..."
