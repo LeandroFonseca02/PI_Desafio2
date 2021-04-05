@@ -4,8 +4,6 @@ Programação Imperatica - Prof. Francisco Pereira
 Leandro Fonseca
 05/04/2021 - 00:20
 Resumo: Desafio 2
-Inputs:
-Outputs:
  */
 
 #include <stdio.h>
@@ -16,7 +14,7 @@ Outputs:
 
 
 int main(){
-    setlocale(LC_ALL, "");  // importa as variáveis de ambiente
+    setlocale(LC_ALL, "en_US.UTF-8");  // importa as variáveis de ambiente
     setlocale (LC_CTYPE, "en_US.UTF-8");    //Forçar para en_US.UTF-8
     int intMenuChoice = 0, intExit = 0;
     while (intExit != 1){

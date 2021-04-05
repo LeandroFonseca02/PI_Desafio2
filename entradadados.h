@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "coniolinux.h"
 
+void letrasMaiscEspaco();
 
 void clearArray(int intStringLength, unsigned char chrArray[intStringLength]){
     for (int i = 0; i <intStringLength; ++i) {
@@ -36,15 +37,15 @@ int checkContinue()
     return intExit;
 }
 
-int linuxPTchar(){
+unsigned char linuxPTchar(){
     //Caracteres Portugueses Linux
     //Linux - Se utilizar unsigned char e subtrair ao ultimo numero da tabela extendida ascii (255)
     //o 195 que é a keycode das teclas especiais no layout portugues, e somar
     //o segundo keycode do caracter e somar 4 obtem-se o codigo ascii da extended table utf-8
     //printf("%lc %d\n", 255-195+((int)chr)+4,255-195+((int)chr)+4);
-    int intKeycode = 0, intUTF8 = 0;
+    unsigned char intKeycode = 0, intUTF8 = 0;
     intKeycode = getche();
-    intUTF8 = 255 - 195 + intKeycode + 4;
+    intUTF8 = 255 - 195 + (int)intKeycode + 4;
     return intUTF8;
 }
 
@@ -66,62 +67,7 @@ void printStartMenu() {
     fflush(stdin);
 }
 
-void letrasMaiscEspaco(){
-    //Letras Maiúsculas + espaço
 
-    printf(MENU_SELECTED_OPTION_1);
-
-    int intStringPosition = 0, intStringLength = 0;
-
-    printf(MENU_DATA_TYPE_STRING_LENGTH);
-
-    scanf("%d", &intStringLength);
-    clsKeyboardBuffer();
-    unsigned char chrData[intStringLength];
-    unsigned char chrUserInput = 0;
-    unsigned char *chrUserData = chrData;
-
-    clearArray(intStringLength,chrData);
-
-    printf(MENU_DATA_ENTRY);
-
-    do {
-        chrUserInput = getche();
-        //Letras Maiúsculas + espaço
-        if ((chrUserInput > 64 && chrUserInput < 91) || (chrUserInput == 32)) {
-            chrUserData[intStringPosition] = chrUserInput;
-            chrUserData[intStringPosition+1] = 0;
-            intStringPosition++;
-        }
-            //Letras portuguesas maisculas linux
-        else if(chrUserInput == 195){
-            chrUserInput = linuxPTchar();
-            if(chrUserInput > 191 && chrUserInput < 222){
-                chrUserData[intStringPosition] = chrUserInput;
-                chrUserData[intStringPosition+1] = 0;
-                intStringPosition++;
-            }else{
-                chrUserData[intStringPosition] = 0;
-            }
-
-        }
-                //Tecla de Enter
-        else if(chrUserInput == 10){
-            intStringPosition = intStringLength+1;
-        }
-            //Tecla de BackSpace
-        else if(chrUserInput == 8){
-            chrUserData[intStringPosition] = 0;
-            intStringPosition--;
-        }else{
-            chrUserData[intStringPosition] = 0;
-        }
-    } while (intStringPosition < intStringLength);
-    printf(MENU_DATA_RESULT);
-    for (intStringPosition = 0; intStringPosition < intStringLength; intStringPosition++){
-        printf("%lc",chrUserData[intStringPosition]);
-    }
-}
 
 void letrasMinuscEspaco(){
     //Letras minusculas + espaço
