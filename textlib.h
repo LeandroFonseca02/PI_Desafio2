@@ -1,6 +1,6 @@
 #define MENU_SEPARADOR "###########################################################\n"
 #define MENU_DATA_TYPE "#                      Tipo de Dados                      #\n"
-#define MENU_DATA_EXIT "#   0.Sair do programa\t\t\t\t\t\t\t\t\t  #\n"
+#define MENU_DATA_EXIT "#   0.Sair do programa                                    #\n"
 #define MENU_DATA_TYPE_OPTION "\nEscolha o tipo de dados: "
 #define MENU_DATA_TYPE_STRING_LENGTH "\nIntroduza o comprimento da string(Ex:5;100): "
 #define MENU_DATA_TYPE_DECIMAL_LENGTH "\nIntroduza o comprimento da parte decimal(Ex:2;5): "
